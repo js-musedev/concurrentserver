@@ -1,5 +1,7 @@
 package com.jsbg.concurrentserver.logging;
 
+import com.jsbg.concurrentserver.logging.duplicatehandlers.DuplicateHandler;
+import com.jsbg.concurrentserver.logging.duplicatehandlers.InMemoryDuplicateHandler;
 import com.jsbg.concurrentserver.reporting.Reporter;
 
 import java.io.*;
@@ -7,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-class Logger {
+public class Logger {
     private static final String fileName = "numbers.log";
     private static final Reporter reporter = Reporter.getReporter();
     private static Logger logger = null;
@@ -17,7 +19,7 @@ class Logger {
 
     private Logger() {
         createOrOverwriteFile();
-        this.duplicateHandler = new DuplicateHandler();
+        this.duplicateHandler = new InMemoryDuplicateHandler();
     }
 
     private void createOrOverwriteFile() {
@@ -41,7 +43,7 @@ class Logger {
         }
     }
 
-    boolean contains(int n) {
+    public boolean contains(int n) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
@@ -57,7 +59,7 @@ class Logger {
         return false;
     }
 
-    synchronized static Logger getLogger() {
+    public synchronized static Logger getLogger() {
         if (logger == null) {
             logger = new Logger();
         }
