@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:28.0-jre'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
+}
+
+application {
+    mainClassName = 'com.jsbg.concurrentserver.Main'
+}
+
+test {
+    useJUnitPlatform()
+}
