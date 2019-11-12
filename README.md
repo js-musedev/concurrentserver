@@ -12,4 +12,4 @@ All valid number inputs are logged in `numbers.log`, except duplicates.
 The server reports new inputs every ten seconds to standard output.
 
 ### Design Decisions
-The server reads inputs from a buffer and only logs unique input numbers. To limit memory usage, unique numbers are inserted into a bloom filter before being logged. The tradeoff with using less memory is that we occasionally have to read the log file to find duplicates, but in a use case where duplicates are rare, this does not impact performance. Further, one client trying to insert many duplicates has no performance impact on other clients.
+The server reads inputs from a buffer and only logs unique input numbers. To limit memory usage, unique numbers are inserted into a bloom filter before being logged. The tradeoff with using less memory is that we occasionally have to read the log file to find duplicates, but in a use case where duplicates are rare, this does not impact performance. Further, one client trying to insert many duplicates has no performance impact on unique inputs from other clients.
