@@ -50,6 +50,7 @@ public class Logger {
             while ((line = reader.readLine()) != null) {
                 int current = Integer.parseInt(line);
                 if (current == n) {
+                    reader.close();
                     return true;
                 }
             }
